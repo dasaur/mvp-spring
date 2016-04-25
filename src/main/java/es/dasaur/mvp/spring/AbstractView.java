@@ -5,6 +5,7 @@ package es.dasaur.mvp.spring;
  * 
  * @author dasaur
  * 
+ * @param <V> {@link View} instance.
  * @param <P> {@link Presenter} instance.
  */
 public abstract class AbstractView 

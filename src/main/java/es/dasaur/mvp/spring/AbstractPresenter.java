@@ -16,6 +16,7 @@ import es.dasaur.mvp.spring.exceptions.ViewInstantiationException;
  * 
  * @param <M> Model instance, often a service.
  * @param <V> {@link View} instance.
+ * @param <P> {@link Presenter} instance.
  */
 public abstract class AbstractPresenter 
         <M, V extends View<V, P>, P extends Presenter<M, V, P>>
