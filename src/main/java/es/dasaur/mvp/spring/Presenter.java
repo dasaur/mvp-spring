@@ -11,7 +11,7 @@ package es.dasaur.mvp.spring;
  * @param <V> {@link View} instance.
  */
 public interface Presenter 
-        <M, V extends View<? extends Presenter<M,V>>> {
+        <M, V extends View<V, P>, P extends Presenter<M, V, P>> {
 
     /**
      * Executes presenter initialization logic.
@@ -43,11 +43,10 @@ public interface Presenter
     /**
      * @return the mainPresenter
      */
-    Presenter<?, ? extends View<? extends Presenter<?,?>>> getParentPresenter();
+    Presenter<?, ?, ?> getParentPresenter();
 
     /**
      * @param mainPresenter the mainPresenter to set
      */
-    void setParentPresenter(
-            Presenter<?, ? extends View<? extends Presenter<?,?>>> mainPresenter);
+    void setParentPresenter(Presenter<?, ?, ?> mainPresenter);
 }

@@ -10,7 +10,7 @@ import es.dasaur.mvp.spring.AbstractView;
 @Named
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class TestViewImpl 
-        extends AbstractView<TestPresenter>
+        extends AbstractView<TestView, TestPresenter>
         implements TestView {
     
     @Override

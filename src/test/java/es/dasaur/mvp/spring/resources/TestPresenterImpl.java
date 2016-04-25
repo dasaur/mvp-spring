@@ -10,7 +10,7 @@ import es.dasaur.mvp.spring.AbstractPresenter;
 @Named
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class TestPresenterImpl 
-        extends AbstractPresenter<TestService, TestView>
+        extends AbstractPresenter<TestService, TestView, TestPresenter>
         implements TestPresenter {
 
     public TestPresenterImpl() {

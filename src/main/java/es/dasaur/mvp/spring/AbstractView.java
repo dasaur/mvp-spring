@@ -8,8 +8,8 @@ package es.dasaur.mvp.spring;
  * @param <P> {@link Presenter} instance.
  */
 public abstract class AbstractView 
-        <P extends Presenter<?, ? extends View<P>>>
-        implements View <P> {
+        <V extends View<V, P>, P extends Presenter<?, V, P>>
+        implements View <V, P> {
     
     protected P presenter;
 

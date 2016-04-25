@@ -9,7 +9,7 @@ package es.dasaur.mvp.spring;
  * @param <P> {@link Presenter} instance.
  */
 public interface View 
-    <P extends Presenter<?, ? extends View<P>>> {
+        <V extends View<V, P>, P extends Presenter<?, V, P>> {
     
     /**
      * Executes view initialization logic.

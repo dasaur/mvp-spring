@@ -17,12 +17,13 @@ import es.dasaur.mvp.spring.exceptions.ViewInstantiationException;
  * @param <M> Model instance, often a service.
  * @param <V> {@link View} instance.
  */
-public abstract class AbstractPresenter <M, V extends View<? extends Presenter<M,V>>>
-        implements Presenter<M, V> {
+public abstract class AbstractPresenter 
+        <M, V extends View<V, P>, P extends Presenter<M, V, P>>
+        implements Presenter<M, V, P> {
     
     private static final String PRESENTER_FIELD_NAME = "presenter";
 
-    private Presenter<?, ? extends View<? extends Presenter<?, ?>>> parentPresenter;
+    private Presenter<?, ?, ?> parentPresenter;
     
     @Inject
     protected M service;
@@ -121,13 +122,12 @@ public abstract class AbstractPresenter <M, V extends View<? extends Presenter<M
     }
 
     @Override
-    public Presenter<?, ? extends View<? extends Presenter<?, ?>>> getParentPresenter() {
+    public Presenter<?, ?, ?> getParentPresenter() {
         return parentPresenter;
     }
 
     @Override
-    public void setParentPresenter(
-            Presenter<?, ? extends View<? extends Presenter<?, ?>>> parentPresenter) {
+    public void setParentPresenter(Presenter<?, ?, ?> parentPresenter) {
         this.parentPresenter = parentPresenter;
     }
     
