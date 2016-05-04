@@ -1,5 +1,6 @@
 package es.dasaur.mvp.spring.resources;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -10,8 +11,11 @@ import es.dasaur.mvp.spring.AbstractPresenter;
 @Named
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class TestPresenterImpl 
-        extends AbstractPresenter<TestService, TestView, TestPresenter>
+        extends AbstractPresenter<TestView, TestPresenter>
         implements TestPresenter {
+    
+    @Inject
+    private TestService service;
 
     public TestPresenterImpl() {
         super(TestViewImpl.class);
