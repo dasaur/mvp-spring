@@ -7,4 +7,6 @@ public interface TestView
 
     TestPresenter getPresenter();
     
+    boolean getInitiated();
+    
 }

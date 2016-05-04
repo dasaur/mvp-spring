@@ -13,13 +13,9 @@ import es.dasaur.mvp.spring.AbstractPresenter;
 public class TestPresenterImpl 
         extends AbstractPresenter<TestView, TestPresenter>
         implements TestPresenter {
-    
+
     @Inject
     private TestService service;
-
-    public TestPresenterImpl() {
-        super(TestViewImpl.class);
-    }
 
     @Override
     public TestService getService() {

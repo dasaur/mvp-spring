@@ -29,6 +29,8 @@ public class MVPTest {
         assertNotNull("Null presenter", presenter);
         assertNotNull("Null model", presenter.getService());
         assertNotNull("Null view", presenter.getView());
+        assertTrue("View did not initiate on construction", 
+                presenter.getView().getInitiated());
         assertNotNull("Null presenter reference at view", 
                 presenter.getView().getPresenter());
     }

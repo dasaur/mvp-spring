@@ -13,24 +13,21 @@ public class TestViewImpl
         extends AbstractView<TestView, TestPresenter>
         implements TestView {
     
+    boolean initiated = false;
+    
     @Override
     public void init() {
-        // no action
-    }
-
-    @Override
-    public void refresh() {
-        // no action
-    }
-
-    @Override
-    public void close() {
-        // no action
+        initiated = true;
     }
 
     @Override
     public TestPresenter getPresenter() {
         return presenter;
+    }
+
+    @Override
+    public boolean getInitiated() {
+        return initiated;
     }
 
 }

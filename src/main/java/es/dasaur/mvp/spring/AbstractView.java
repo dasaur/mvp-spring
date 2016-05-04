@@ -14,4 +14,14 @@ public abstract class AbstractView
     
     protected P presenter;
 
+    @Override
+    public void refresh() {
+        // no action
+    }
+
+    @Override
+    public void close() {
+        // no action
+    }
+
 }

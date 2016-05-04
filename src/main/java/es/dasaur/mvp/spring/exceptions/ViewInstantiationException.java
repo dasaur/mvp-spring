@@ -11,7 +11,7 @@ public class ViewInstantiationException extends RuntimeException {
     private static final long serialVersionUID = 6392164110838064896L;
     
     public static final String ERROR_NO_FIELD_FORMAT = 
-            "%s or one of its superclasses must declare the following field: %s %s";
+            "%s must have the following accesible field (either in the class itself or a superclass): %s %s";
 
     public static final String ERROR_NO_ACCESS_FORMAT = 
             "%s must have access to the %s field";

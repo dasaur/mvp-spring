@@ -29,18 +29,9 @@ public abstract class AbstractPresenter
     @Inject
     protected V view;
 
-    private Class<? extends V> viewImplClass;
+    private Class<?> viewImplClass;
     
     private String title;
-    
-    /**
-     * Constructor getting the view class for setting the Presenter-View 
-     * bidirectional link.
-     * @param viewImplClass
-     */
-    protected AbstractPresenter(Class<? extends V> viewImplClass){
-        this.viewImplClass = viewImplClass;
-    }
     
     /**
      * Completes the Presenter-View bidirectional link. <br>
@@ -49,6 +40,7 @@ public abstract class AbstractPresenter
      */
     @PostConstruct
     public final void postConstruct() throws IllegalAccessException {
+        this.viewImplClass = view.getClass();
         Field f = getPresenterField();
         f.setAccessible(true);
         f.set(view, this);
