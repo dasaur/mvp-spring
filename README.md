@@ -5,7 +5,7 @@ Opinionated (Model)-View-Presenter implementation for Spring.
 As a greenhorn developer, I've searched for a satisfying implementation of the Model-View-Presenter Pattern which I could use with Spring. This proved a task harder than expected; in the end, I decided I could use thaose efforts in making an implementation myself.
 
 ## Use guide
-The core interfaces are Presenter<M, V, P> (M being an unconstrained model class) and View<V, P>. The generic usage aims to enforce correct referencing, giving compile-time errors instead of finding wrong references or DI errors.
+The core interfaces are Presenter<V, P> and View<V, P>. The generic usage aims to enforce correct referencing, giving compile-time errors instead of finding wrong references or DI errors.
 
 Presenter includes a getter and setter for a parent presenter, in order to support a presenter hierarchy (the existence of a main presenter with any other presenter as its child, for example).
 
