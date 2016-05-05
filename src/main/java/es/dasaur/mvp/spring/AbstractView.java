@@ -5,23 +5,11 @@ package es.dasaur.mvp.spring;
  * 
  * @author dasaur
  * 
- * @param <V> {@link View} instance.
  * @param <P> {@link Presenter} instance.
  */
-public abstract class AbstractView 
-        <V extends View<V, P>, P extends Presenter<V, P>>
-        implements View <V, P> {
+public abstract class AbstractView <P extends Presenter<? extends View<P>>>
+        implements View <P> {
     
     protected P presenter;
-
-    @Override
-    public void refresh() {
-        // no action
-    }
-
-    @Override
-    public void close() {
-        // no action
-    }
 
 }

@@ -1,5 +1,7 @@
 package es.dasaur.mvp.spring.exceptions;
 
+import es.dasaur.mvp.spring.View;
+
 /**
  * Exception thrown when trying to instance a {@link View} without a presenter field.
  * 

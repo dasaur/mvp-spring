@@ -6,25 +6,13 @@ package es.dasaur.mvp.spring;
  * 
  * @author dasaur
  *
- * @param <V> {@link View} instance.
  * @param <P> {@link Presenter} instance.
  */
-public interface View 
-        <V extends View<V, P>, P extends Presenter<V, P>> {
+public interface View <P extends Presenter<? extends View<P>>> {
     
     /**
      * Executes view initialization logic.
      */
     void init();
-    
-    /**
-     * Executes view refreshing logic.
-     */
-    void refresh();
-
-    /**
-     * Executes view finalization logic.
-     */
-    void close();
 
 }

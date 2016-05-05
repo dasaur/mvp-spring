@@ -7,12 +7,9 @@ package es.dasaur.mvp.spring;
  * 
  * @author dasaur
  *
- * @param <M> Model instance, often a service.
  * @param <V> {@link View} instance.
- * @param <P> {@link Presenter} instance.
  */
-public interface Presenter 
-        <V extends View<V, P>, P extends Presenter<V, P>> {
+public interface Presenter <V extends View<? extends Presenter<V>>> {
 
     /**
      * Executes presenter initialization logic.
@@ -44,10 +41,10 @@ public interface Presenter
     /**
      * @return the mainPresenter
      */
-    Presenter<?, ?> getParentPresenter();
+    Presenter<?> getParentPresenter();
 
     /**
      * @param mainPresenter the mainPresenter to set
      */
-    void setParentPresenter(Presenter<?, ?> mainPresenter);
+    void setParentPresenter(Presenter<?> mainPresenter);
 }
