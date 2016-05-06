@@ -22,7 +22,7 @@ public abstract class AbstractPresenter <V extends View<? extends Presenter<V>>>
     private static final String PRESENTER_FIELD_NAME = "presenter";
 
     private Presenter<?> parentPresenter;
-    
+
     @Inject
     protected V view;
 

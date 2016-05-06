@@ -11,5 +11,5 @@ public abstract class AbstractView <P extends Presenter<? extends View<P>>>
         implements View <P> {
     
     protected P presenter;
-
+    
 }

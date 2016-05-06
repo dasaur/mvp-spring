@@ -1,10 +1,10 @@
-package es.dasaur.mvp.spring.config;
+package es.dasaur.proto;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages="es.dasaur.mvp.spring.resources")
-public class TestConfig {
+@ComponentScan
+public class ProtoConfig {
 
 }
