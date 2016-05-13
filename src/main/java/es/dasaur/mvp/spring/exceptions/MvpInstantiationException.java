@@ -8,7 +8,7 @@ import es.dasaur.mvp.spring.View;
  * @author dasaur
  *
  */
-public class ViewInstantiationException extends RuntimeException {
+public class MvpInstantiationException extends RuntimeException {
 
     private static final long serialVersionUID = 6392164110838064896L;
     
@@ -18,24 +18,24 @@ public class ViewInstantiationException extends RuntimeException {
     public static final String ERROR_NO_ACCESS_FORMAT = 
             "%s must have access to the %s field";
 
-    public ViewInstantiationException() {
+    public MvpInstantiationException() {
         super();
     }
 
-    public ViewInstantiationException(String message, Throwable cause,
+    public MvpInstantiationException(String message, Throwable cause,
             boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 
-    public ViewInstantiationException(String message, Throwable cause) {
+    public MvpInstantiationException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ViewInstantiationException(String message) {
+    public MvpInstantiationException(String message) {
         super(message);
     }
 
-    public ViewInstantiationException(Throwable cause) {
+    public MvpInstantiationException(Throwable cause) {
         super(cause);
     }
 

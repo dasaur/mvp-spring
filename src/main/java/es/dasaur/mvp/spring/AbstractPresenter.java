@@ -7,7 +7,7 @@ import java.lang.reflect.ParameterizedType;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import es.dasaur.mvp.spring.exceptions.ViewInstantiationException;
+import es.dasaur.mvp.spring.exceptions.MvpInstantiationException;
 
 /**
  * Abstract presenter, linked to autowired model (usually a service) and {@link View}
@@ -62,9 +62,9 @@ public abstract class AbstractPresenter <V extends View<? extends Presenter<V>>>
             if (!Modifier.isPublic(mod) && !Modifier.isProtected(mod)){
              // Wraps the exception, further detailing the reason behind it
                 String message = String.format(
-                        ViewInstantiationException.ERROR_NO_ACCESS_FORMAT,
+                        MvpInstantiationException.ERROR_NO_ACCESS_FORMAT,
                         viewImplClass.getSimpleName(), PRESENTER_FIELD_NAME);
-                throw new ViewInstantiationException(message);
+                throw new MvpInstantiationException(message);
             }
         } catch (NoSuchFieldException e) {
             f = getInheritedPresenterField(superclass.getSuperclass());
@@ -75,10 +75,10 @@ public abstract class AbstractPresenter <V extends View<? extends Presenter<V>>>
             Class<?> presenterInterface = (Class<?>) pt.getActualTypeArguments()[0];
             String presenterName = presenterInterface.getSimpleName();
             String message = String.format(
-                    ViewInstantiationException.ERROR_NO_FIELD_FORMAT,
+                    MvpInstantiationException.ERROR_NO_FIELD_FORMAT,
                     viewImplClass.getSimpleName(), presenterName,
                     PRESENTER_FIELD_NAME);
-            throw new ViewInstantiationException(message);
+            throw new MvpInstantiationException(message);
         }
         return f;
     }

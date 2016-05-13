@@ -18,14 +18,15 @@ public class ProtoTest {
     @Autowired
     private B bBean;
     
+    @Autowired
+    private DummyView dummyView;
+    
     @Test
     public void test() {
         assertNotNull("null aBean", aBean);
         assertNotNull("null bBean", bBean);
         assertNotNull("null b in aBean", aBean.getB());
         assertNotNull("null a in bBean", bBean.getA());
-        assertNotNull("null a.beanFactory", aBean.getBeanFactory());
-        assertNotNull("null b.beanFactory", bBean.getBeanFactory());
         assertNotEquals("aBean = bBean.a", aBean, bBean.getA());
         assertNotEquals("bBean = aBean.b", bBean, aBean.getB());
         assertEquals("aBean != aBean.b.a", aBean, aBean.getB().getA());

@@ -32,9 +32,9 @@ public class B {
     public void setA(A a) {
         this.a = a;
     }
-
+/*
     public AutowireCapableBeanFactory getBeanFactory() {
         return beanFactory;
-    }
+    }*/
 
 }
