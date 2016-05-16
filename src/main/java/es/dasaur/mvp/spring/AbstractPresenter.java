@@ -3,9 +3,12 @@ package es.dasaur.mvp.spring;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 import es.dasaur.mvp.spring.exceptions.MvpInstantiationException;
 
@@ -18,38 +21,50 @@ import es.dasaur.mvp.spring.exceptions.MvpInstantiationException;
  */
 public abstract class AbstractPresenter <V extends View<? extends Presenter<V>>>
         implements Presenter<V> {
-    
-    private static final String PRESENTER_FIELD_NAME = "presenter";
 
-    private Presenter<?> parentPresenter;
-
-    @Inject
-    protected V view;
-
-    private Class<?> viewImplClass;
     
     private String title;
+    private Presenter<?> parentPresenter;
+    private List<Presenter<?>> children;
     
-    /**
-     * Completes the Presenter-View bidirectional link. <br>
-     * This allows for MVP implementations using prototype scoped beans.
-     * @throws IllegalArgumentException 
-     */
+    protected V view;
+    private Class<? extends V> viewClass;
+    
+    private static final String PRESENTER_FIELD_NAME = "presenter";
+    
+    @Autowired
+    private DefaultListableBeanFactory beanFactory;
+    
+    @SuppressWarnings("unchecked")
     @PostConstruct
-    public final void postConstruct() throws IllegalAccessException {
-        this.viewImplClass = view.getClass();
-        Field f = getPresenterField();
-        f.setAccessible(true);
-        f.set(view, this);
-        init();
+    public final void postConstruct() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        if(view == null) {
+            viewClass = (Class<V>) ((ParameterizedType) getClass()
+                    .getGenericSuperclass()).getActualTypeArguments()[0];
+            view =  getImpl().newInstance();
+            viewClass = (Class<? extends V>) view.getClass();
+            Field f = getPresenterField();
+            f.setAccessible(true);
+            f.set(view, this);
+            beanFactory.autowireBean(view);
+            init();
+        }
     }
     
+    @SuppressWarnings("unchecked")
+    private Class<? extends V> getImpl() throws ClassNotFoundException {
+        return (Class<? extends V>) Class.forName(beanFactory.getBeanDefinition(
+                beanFactory.getBeanNamesForType(viewClass)[0])
+                .getBeanClassName());
+    }
+    
+
     private Field getPresenterField() {
         Field f;
         try {
-            f = viewImplClass.getDeclaredField(PRESENTER_FIELD_NAME);
+            f = viewClass.getDeclaredField(PRESENTER_FIELD_NAME);
         } catch (NoSuchFieldException e) {
-            f = getInheritedPresenterField(viewImplClass.getSuperclass());
+            f = getInheritedPresenterField(viewClass.getSuperclass());
         }
         return f;
     }
@@ -63,7 +78,7 @@ public abstract class AbstractPresenter <V extends View<? extends Presenter<V>>>
              // Wraps the exception, further detailing the reason behind it
                 String message = String.format(
                         MvpInstantiationException.ERROR_NO_ACCESS_FORMAT,
-                        viewImplClass.getSimpleName(), PRESENTER_FIELD_NAME);
+                        viewClass.getSimpleName(), PRESENTER_FIELD_NAME);
                 throw new MvpInstantiationException(message);
             }
         } catch (NoSuchFieldException e) {
@@ -71,12 +86,12 @@ public abstract class AbstractPresenter <V extends View<? extends Presenter<V>>>
         } catch (NullPointerException e) {
          // Wraps the exception, further detailing the reason behind it
             ParameterizedType pt = (ParameterizedType)
-                    viewImplClass.getGenericSuperclass();
+                    viewClass.getGenericSuperclass();
             Class<?> presenterInterface = (Class<?>) pt.getActualTypeArguments()[0];
             String presenterName = presenterInterface.getSimpleName();
             String message = String.format(
                     MvpInstantiationException.ERROR_NO_FIELD_FORMAT,
-                    viewImplClass.getSimpleName(), presenterName,
+                    viewClass.getSimpleName(), presenterName,
                     PRESENTER_FIELD_NAME);
             throw new MvpInstantiationException(message);
         }
