@@ -2,10 +2,9 @@ package es.dasaur.mvp.spring;
 
 import static org.junit.Assert.*;
 
-import javax.inject.Inject;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,13 +16,13 @@ import es.dasaur.mvp.spring.resources.TestView;
 @ContextConfiguration(classes = TestConfig.class)
 public class MVPTest {
     
-    @Inject
+    @Autowired
     TestPresenter presenter;
     
-    @Inject
+    @Autowired
     TestPresenter otherPresenter;
     
-    @Inject
+    @Autowired
     TestView view;
     
     @Test

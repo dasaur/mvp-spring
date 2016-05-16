@@ -1,6 +1,6 @@
 package es.dasaur.mvp.spring.resources;
 
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import es.dasaur.mvp.spring.AbstractPresenter;
 import es.dasaur.mvp.spring.annotations.Presenter;
@@ -9,7 +9,7 @@ import es.dasaur.mvp.spring.annotations.Presenter;
 public class TestPresenterImpl extends AbstractPresenter<TestView>
         implements TestPresenter {
 
-    @Inject
+    @Autowired
     private TestService service;
 
     @Override
